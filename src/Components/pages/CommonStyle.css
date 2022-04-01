@@ -1,0 +1,51 @@
+#loginImg{
+    height: 60%;
+    padding-left: 20px;
+}
+
+.product{
+    border: 2px solid blueviolet;
+    border-radius: 10px;
+    margin: 25px;
+    background-color: rgb(172, 230, 210);
+}
+.dList{
+    
+   margin-left: 15px;
+   padding: 10px;
+   border: 2px solid;
+   margin-top: 8px;
+   display: block;
+   background-color: rgb(11, 204, 140);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    
+}
+.dList:hover{
+    background-color: rgb(208, 240, 31);
+    border:rgb(210, 243, 25)
+}
+.liSt{
+    list-style-type: none;
+}
+
+#centsImage{
+    height: 30%;
+}
+#depositeForm{
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 30px;
+}
+#updateProductForm{
+    display: none;
+}
+#cartBox{
+    border: 2px solid blueviolet;
+    border-radius: 10px;
+}
+.cartList{
+    list-style: none;
+    font-size: 20px;
+}
