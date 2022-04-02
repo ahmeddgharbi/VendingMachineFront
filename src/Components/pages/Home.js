@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProductContext, UserContext } from "../../App";
-import LoginForm from "../Others/LoginForm";
 import NavBar from "../Others/NavBar";
 import UserStatus from "../Others/UserStatus";
 import "./CommonStyle.css";
@@ -44,6 +43,9 @@ const Home = () => {
 
   const handleOnToCart = (e, pid) => {
     e.preventDefault();
+    if (!session?.key) {
+      alert("Please Login First");
+    }
     const thePd = products.find((pd) => pd._id === pid);
     let totalPrice = 0;
     user.cart.map((it) => {

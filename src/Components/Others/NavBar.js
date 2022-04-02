@@ -8,7 +8,7 @@ const NavBar = () => {
     <div className="d-flex justify-content-center pt-5">
       
       <nav className="">
-        <Link to="/home">
+        <Link to="/">
           <Button className=" m-2">To Home</Button>
         </Link>
         {(user?.username) && (

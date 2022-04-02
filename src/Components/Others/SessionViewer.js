@@ -39,26 +39,21 @@ const SessionViewer = () => {
     <div>
       {session.user?.sessions.length > 1 && (
         <>
-          <h3
+          <div
             id="loginText"
-            className="d-flex justify-content-center my-3  py-2 rounded bg-warning mx-5"
+            className="d-flex flex-column justify-content-center my-3  py-2 rounded bg-warning mx-5"
           >
-            Current Session Token: {session.key}
-          </h3>
-          <ul className="my-0 py-2 bg-info mx-5">
-            <div>Other session tokens:</div>
-            {session.user?.sessions.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-            <div className="mt-2">
-              <button
-                className="btn-danger rounded mt-2"
+            <h3 className="d-flex justify-content-center">There is already an active session using your account. </h3>
+            <div>
+            <button
+                className="btn-danger rounded mt-2 d-block mx-auto"
                 onClick={handleDestroyAllSession}
               >
-                Log Out All Sessions
+                Terminate All Other Sessions
               </button>
             </div>
-          </ul>
+          </div>
+          
         </>
       )}
     </div>

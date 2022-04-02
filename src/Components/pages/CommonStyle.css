@@ -38,9 +38,6 @@
     font-weight: 700;
     margin-right: 30px;
 }
-#updateProductForm{
-    display: none;
-}
 #cartBox{
     border: 2px solid blueviolet;
     border-radius: 10px;

@@ -14,7 +14,12 @@ const Dashboard = () => {
   const [products, setProducts] = useContext(ProductContext);
   const [toUpdate, setToUpdate] = useState("");
 
+  const [updateProduct, setUpdateProduct] = useState({});
+
   const [session, setSession] = useState({});
+
+  const [showProductTable, setShowProductTable] = useState(false);
+  const [showUpdateProduct, setShowUpdateProduct] = useState(false);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("session"));
@@ -118,12 +123,18 @@ const Dashboard = () => {
     prd.push(newProduct);
     setProducts(prd);
   };
-  const handleOnUpdateClick = (e) => {
+  const handleOnUpdateClick = (e, p) => {
     e.preventDefault();
+    const newPrd = {...p};
+    // let obj = products.find(o => o._id === e.target.value );
+    // console.log(obj);
+    
+    console.log('Product Param', newPrd);
+    console.log('updateProduct', updateProduct);
     const productId = e.target.value;
     setToUpdate(productId);
-    document.getElementById("productTable").style.display = "none";
-    document.getElementById("updateProductForm").style.display = "block";
+    setShowProductTable(false);
+    setShowUpdateProduct(true);
   };
   const handleOnDeleteClick = (e) => {
     e.preventDefault();
@@ -141,10 +152,19 @@ const Dashboard = () => {
   };
   const handleDisplay = (e) => {
     e.preventDefault();
+    fetch("http://localhost:3005/api/products/all")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
     setFormName("manageProducts");
-    document.getElementById("productTable").style.display = "block";
-    document.getElementById("updateProductForm").style.display = "none";
+    setShowProductTable(true);
+    setShowUpdateProduct(false);
   };
+
+  function handleUpdateOnSubmit() {
+    setShowProductTable(true);
+    setShowUpdateProduct(false);
+  }
+
   return (
     <div>
       <NavBar></NavBar>
@@ -159,7 +179,7 @@ const Dashboard = () => {
             <ul className="">
               <li className="liSt">
                 <button
-                  onClick={() => setFormName("addProduct")}
+                  onClick={() => {setFormName("addProduct"); setShowProductTable(false); setShowUpdateProduct(false)}}
                   className="dList"
                 >
                   Add Product
@@ -205,8 +225,7 @@ const Dashboard = () => {
                 </Form>
               </div>
             )}
-            {formName === "updateProduct" && <h1>Update Product</h1>}
-            {formName === "manageProducts" && (
+            {showProductTable && (
               <div>
                 <Table id="productTable" striped bordered hover size="sm">
                   <thead>
@@ -230,8 +249,9 @@ const Dashboard = () => {
                         {user._id === pd.sellerId && (
                           <td>
                             <button
-                              onClick={(e) => handleOnUpdateClick(e)}
+                              onClick={(e) => handleOnUpdateClick(e, pd)}
                               value={pd._id}
+                              
                               className="mx-2 btn-warning rounded"
                             >
                               Update
@@ -249,11 +269,11 @@ const Dashboard = () => {
                     ))}
                   </tbody>
                 </Table>
-                <div id="updateProductForm" display="block">
-                  <UpdateProduct productId={toUpdate}></UpdateProduct>
-                </div>
               </div>
-            )}
+            )}{ showUpdateProduct && (<div id="updateProductForm">
+            <h1>Update Product</h1>
+              <UpdateProduct productId={toUpdate} onSubmit={handleUpdateOnSubmit}></UpdateProduct>
+          </div>)}
           </div>
         </div>
       )}
