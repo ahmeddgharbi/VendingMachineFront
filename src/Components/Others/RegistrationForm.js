@@ -56,7 +56,7 @@ const RegistrationForm = () => {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="text" id="password" placeholder="password" />
+          <Form.Control type="password" id="password" placeholder="password" />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Select Your Role</Form.Label>
